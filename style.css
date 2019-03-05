@@ -1,0 +1,26 @@
+body {
+    padding: 10px;
+}
+
+#startBtn, #stopBtn, #restartBtn {
+    margin-top: 10px;
+    margin-right: 5px;
+    width: 213px;
+}
+
+.interestInput {
+    margin-top: 50px;
+    width: 500px;
+}
+
+#results {
+    font-size: 36px;
+}
+
+#principal, #addition, #years, #rate, #frequency {
+    width: 650px;
+}
+
+.stopwatch {
+    font-size: 36px;
+}

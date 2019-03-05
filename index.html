@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Compound Interest Calculator (Ding!)</title>
+</head>
+<body>
+    <h1>
+        Watch (and hear) your interest grow!
+    </h1>
+    <div class='form-group'>
+        <label>Principal</label>
+        <input class="form-control" id="principal" class='interestInput' value="1000000">
+        <label>Annual Addition</label>
+        <input class="form-control" id="addition" class='interestInput' value="1000">
+        <label>Years to Grow</label>
+        <input class="form-control" id="years" class='interestInput' value="10">
+        <label>Interest Rate</label>
+        <input class="form-control" id="rate" class='interestInput' value="10">
+        <label>Compounded (number of times per year)</label>
+        <input class="form-control" id="frequency" class='interestInput' value="365">
+        <button type='submit' href="#" class="btn-primary" onClick="stopwatch.start();" id='startBtn'>Start</a>
+        <button href="#" class="btn-primary" onClick="stopwatch.stop();" id= 'stopBtn'>Stop</a>
+        <button href="#" class="btn-primary" onClick="stopwatch.restart();" id='restartBtn'>Reset</a>
+    </div>
+    <div class="stopwatch"></div>
+    <div id='results'>
+        <div id='totalAmountHeader'>
+            Eventually you will have:
+        </div>
+        <div id='totalAmount'>
+            $0.00
+        </div>
+        <div id='totalEarnedHeader'>
+            Eventually you will earn:
+        </div>
+        <div id='totalEarned'>
+            $0.00
+        </div>
+        <div id='currentAmountHeader'>
+            So far you have earned:
+        </div>
+        <div id="currentAmount">
+            $0.00
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
