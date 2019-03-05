@@ -9,8 +9,13 @@ class Stopwatch {
         this.totalEarned = 0;
         this.first = true; // helps for getting ding at first cent
         this.print(this.times);
-        
     }
+
+    // FIX ISSUE WHERE THE 25 CENT SOUND PLAYS A LOT OF TIMES WHILE ON 25 CENTS
+    // DEPLOY TO WATCHYOURINTERESTGROW.COM
+
+
+
     
     reset() {
         this.times = [ 0, 0, 0 ];
@@ -84,12 +89,17 @@ class Stopwatch {
         }
     }
 
+    playSound(filename) {
+        var sound = new Audio(filename);
+        sound.play();
+    }
+
     calculateInterest() {
         var principal = Number(document.getElementById("principal").value)
         var addition = Number(document.getElementById("addition").value)
         var years = Number(document.getElementById("years").value)
         var rate = Number(document.getElementById("rate").value)
-        if (rate > 1) { // fix different rate types given
+        if (rate >= 1) { // fix different rate types given
             rate = rate / 100.0
         }
         var compoundNum = Number(document.getElementById("frequency").value)
@@ -98,44 +108,41 @@ class Stopwatch {
         var compoundInterestFormula = (principal * (Math.pow((1+i), n)))
         var annuityFormula = addition * ((Math.pow((1+i), n)) - 1) / rate
         var totalAmount = compoundInterestFormula + annuityFormula
-        this.totalAmount = totalAmount
+        this.totalAmount = totalAmount.toFixed(2)
         var totalEarned = (totalAmount - (principal + (years * addition))).toFixed(2)
         this.totalEarned = totalEarned
 
-
         var totalSeconds = years * 365 * 24 * 60 * 60
         let seconds = this.times[0] * 60 + this.times[1] + this.times[2] / 100
-
         var current = (seconds / totalSeconds * totalEarned).toFixed(2);
 
         // really complicated annoying code to make sure it dings after first time.
-        if (((current > this.currentAmount) && this.currentAmount > 0.0) || (current == 0.01) && this.first) {
+        if ((current > this.currentAmount && this.currentAmount > 0.0) || (current == 0.01) && this.first) {
             if (this.first) {
                 this.first = false
             }
-            var audioDing = new Audio("sounds/ding.m4a");
-            audioDing.play();
+            this.playSound("sounds/ding.m4a")
         }
-
-        if ((current - Math.floor(current) == 0.0) && (current >= 0.01)) { // for every dollar
-            var audioHeaven = new Audio("sounds/heaven.m4a");
-            audioHeaven.play();
-        }
-        if (current - Math.floor(current) == 0.25) {
-            var coinDrop25 = new Audio("sounds/25_cents.m4a");
-            coinDrop25.play();
-        }
-        if (current - Math.floor(current) == 0.50) {
-            var coinDrop50 = new Audio("sounds/50_cents.m4a");
-            coinDrop50.play();
-        }
-        if (current - Math.floor(current) == 0.75) {
-            var coinDrop = new Audio("sounds/75_cents.m4a");
-            coinDrop.play();
-        }
-
-
         this.currentAmount = current
+        let dollarCheck = this.currentAmount == 0.0
+        let quarterCheck = this.currentAmount == 0.25
+        let halfCheck = this.currentAmount == 0.50
+        let threeQuarterCheck = this.currentAmount == 0.75
+        
+
+        // Play sounds at certain times, just once.
+        if (dollarCheck && current >= 0.01) { // for every dollar
+            this.playSound("sounds/heaven.m4a")
+        }
+        if (quarterCheck) {
+            this.playSound("sounds/25_cents.m4a")
+        }
+        if (halfCheck) {
+            this.playSound("sounds/50_cents.m4a")
+        }
+        if (threeQuarterCheck) {
+            this.playSound("sounds/75_cents.m4a")
+        }
         
         var totalEarnedDiv = document.getElementById("totalAmount")
         totalEarnedDiv.innerText = "$" + this.totalAmount;
