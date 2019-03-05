@@ -113,24 +113,24 @@ class Stopwatch {
             if (this.first) {
                 this.first = false
             }
-            var audioDing = new Audio("ding.m4a");
+            var audioDing = new Audio("sounds/ding.m4a");
             audioDing.play();
         }
 
         if ((current - Math.floor(current) == 0.0) && (current >= 0.01)) { // for every dollar
-            var audioHeaven = new Audio("heaven.m4a");
+            var audioHeaven = new Audio("sounds/heaven.m4a");
             audioHeaven.play();
         }
         if (current - Math.floor(current) == 0.25) {
-            var coinDrop25 = new Audio("25_cents.m4a");
+            var coinDrop25 = new Audio("sounds/25_cents.m4a");
             coinDrop25.play();
         }
         if (current - Math.floor(current) == 0.50) {
-            var coinDrop50 = new Audio("50_cents.m4a");
+            var coinDrop50 = new Audio("sounds/50_cents.m4a");
             coinDrop50.play();
         }
         if (current - Math.floor(current) == 0.75) {
-            var coinDrop = new Audio("75_cents.m4a");
+            var coinDrop = new Audio("sounds/75_cents.m4a");
             coinDrop.play();
         }
 
