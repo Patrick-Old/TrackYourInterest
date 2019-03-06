@@ -5,9 +5,9 @@ class Stopwatch {
         this.results = results;
         this.laps = [];
         this.reset();
-        this.totalAmount = 0;
-        this.totalEarned = 0;
         this.first = true; // helps for getting ding at first cent
+        this.quarterCheck = true;
+        this.dollarCheck = true;
         this.print(this.times);
     }
 
@@ -55,6 +55,8 @@ class Stopwatch {
         var currentAmountDiv = document.getElementById("currentAmount")
         currentAmountDiv.innerText = "$0.00";
         this.first = true; // helps for getting ding at first cent
+        this.quarterCheck = true;
+        this.dollarCheck = true;
         this.reset();
         this.stop();
         this.print(this.times);
@@ -116,39 +118,41 @@ class Stopwatch {
         let seconds = this.times[0] * 60 + this.times[1] + this.times[2] / 100
         var current = (seconds / totalSeconds * totalEarned).toFixed(2);
 
-        // really complicated annoying code to make sure it dings after first time.
+        // annoying code to make sure it dings after first time.
         if ((current > this.currentAmount && this.currentAmount > 0.0) || (current == 0.01) && this.first) {
-            if (this.first) {
-                this.first = false
-            }
+            this.first = false
             this.playSound("sounds/ding.m4a")
         }
         this.currentAmount = current
-        let dollarCheck = this.currentAmount == 0.0
-        let quarterCheck = this.currentAmount == 0.25
-        let halfCheck = this.currentAmount == 0.50
-        let threeQuarterCheck = this.currentAmount == 0.75
-        
+        var currCents = (current % 1).toFixed(2)
+        let dollarCheck = currCents == 0.00
+        let quarterCheck = (currCents == 0.25 || currCents == 0.50 || currCents == 0.75)
 
-        // Play sounds at certain times, just once.
-        if (dollarCheck && current >= 0.01) { // for every dollar
-            this.playSound("sounds/heaven.m4a")
+        if (dollarCheck && this.currentAmount >= 0.01 && this.dollarCheck) { // for every dollar
+            this.dollarCheck = false;
+            this.playSound("sounds/heaven.m4a");
         }
-        if (quarterCheck) {
-            this.playSound("sounds/25_cents.m4a")
+        if (quarterCheck && this.quarterCheck) {
+            this.quarterCheck = false;
+            this.playSound("sounds/25_cents.m4a");
         }
-        if (halfCheck) {
-            this.playSound("sounds/50_cents.m4a")
-        }
-        if (threeQuarterCheck) {
-            this.playSound("sounds/75_cents.m4a")
-        }
+
+        let dollarCheckFinished = currCents == 0.01
+        let quarterCheckFinished = (currCents == 0.26 || currCents == 0.51 || currCents == 0.76)
         
-        var totalEarnedDiv = document.getElementById("totalAmount")
+        if (dollarCheckFinished) {
+            this.dollarCheck = true;
+        }
+        if (quarterCheckFinished) {
+            this.quarterCheck = true;
+        }
+
+        
+        var totalEarnedDiv = document.getElementById("totalAmount");
         totalEarnedDiv.innerText = "$" + this.totalAmount;
-        var totalAmountDiv = document.getElementById("totalEarned")
+        var totalAmountDiv = document.getElementById("totalEarned");
         totalAmountDiv.innerText = "$" + this.totalEarned;
-        var currentAmountDiv = document.getElementById("currentAmount")
+        var currentAmountDiv = document.getElementById("currentAmount");
         currentAmountDiv.innerText = "$" + this.currentAmount;
 
     }
