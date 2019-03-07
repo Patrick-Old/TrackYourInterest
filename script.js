@@ -14,7 +14,10 @@ class Stopwatch {
     // FIX ISSUE WHERE THE 25 CENT SOUND PLAYS A LOT OF TIMES WHILE ON 25 CENTS
     // DEPLOY TO WATCHYOURINTERESTGROW.COM
 
-
+    showAlert(message) {
+        $("#missing-alert").html("Missing information: " + message);
+        $("#missing-alert").show();
+    }
 
     
     reset() {
@@ -22,6 +25,28 @@ class Stopwatch {
     }
     
     start() {
+        var principal = Number(document.getElementById("principal").value)
+        var years = Number(document.getElementById("years").value)
+        var compoundNum = Number(document.getElementById("frequency").value)
+        var rate = Number(document.getElementById("rate").value)
+        if (rate >= 1) { // fix different rate types given
+            rate = rate / 100.0
+        }
+        if (principal == false && principal >= 0) {
+            this.showAlert("Must include principal");
+        } else if (years == false) {
+            this.showAlert("Must include number of years");
+        } else if (rate == false) {
+            this.showAlert("Must include rate");
+        } else if (compoundNum == false) {
+            this.showAlert("Must include number of compounds per year");
+        } else {
+            $("#missing-alert").hide();
+        }
+        if (principal == false || years == false || rate == false || compoundNum == false) {
+            return
+        }
+
         if (!this.time) this.time = performance.now();
         if (!this.running) {
             this.running = true;
@@ -50,13 +75,17 @@ class Stopwatch {
         }
         this.currentAmount = 0;
         this.totalAmount = 0;
-        var totalMoneyDiv = document.getElementById("totalAmount")
-        totalMoneyDiv.innerText = "$0.00";
+        this.totalEarned = 0;
+        var totalAmountDiv = document.getElementById("totalAmount")
+        totalAmountDiv.innerText = "$0.00";
+        var totalEarnedDiv = document.getElementById("totalEarned")
+        totalEarnedDiv.innerText = "$0.00";
         var currentAmountDiv = document.getElementById("currentAmount")
         currentAmountDiv.innerText = "$0.00";
         this.first = true; // helps for getting ding at first cent
         this.quarterCheck = true;
         this.dollarCheck = true;
+        $("#missing-alert").hide();
         this.reset();
         this.stop();
         this.print(this.times);
@@ -105,6 +134,7 @@ class Stopwatch {
             rate = rate / 100.0
         }
         var compoundNum = Number(document.getElementById("frequency").value)
+
         var i = (rate / compoundNum)
         var n = (years * compoundNum)
         var compoundInterestFormula = (principal * (Math.pow((1+i), n)))
@@ -147,13 +177,27 @@ class Stopwatch {
             this.quarterCheck = true;
         }
 
-        
-        var totalEarnedDiv = document.getElementById("totalAmount");
-        totalEarnedDiv.innerText = "$" + this.totalAmount;
-        var totalAmountDiv = document.getElementById("totalEarned");
-        totalAmountDiv.innerText = "$" + this.totalEarned;
-        var currentAmountDiv = document.getElementById("currentAmount");
-        currentAmountDiv.innerText = "$" + this.currentAmount;
+        if (isNaN(this.totalAmount) || isNaN(this.totalEarned || isNaN(this.currentAmount))){
+            if (isNaN(this.totalAmount)) {
+                var totalEarnedDiv = document.getElementById("totalAmount");
+                totalEarnedDiv.innerText = "$0.00";
+            }
+            if (isNaN(this.totalEarned)) {
+                var totalAmountDiv = document.getElementById("totalEarned");
+                totalAmountDiv.innerText = "$0.00";
+            }
+            if (isNaN(this.currentAmount)) {
+                var currentAmountDiv = document.getElementById("currentAmount");
+                currentAmountDiv.innerText = "$0.00";
+            }
+        } else {
+            var totalEarnedDiv = document.getElementById("totalAmount");
+            totalEarnedDiv.innerText = "$" + this.totalAmount;
+            var totalAmountDiv = document.getElementById("totalEarned");
+            totalAmountDiv.innerText = "$" + this.totalEarned;
+            var currentAmountDiv = document.getElementById("currentAmount");
+            currentAmountDiv.innerText = "$" + this.currentAmount;
+        }
 
     }
     

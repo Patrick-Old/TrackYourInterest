@@ -17,8 +17,12 @@ body {
     font-size: 36px;
 }
 
-#principal, #addition, #years, #rate, #frequency {
+#principal, #addition, #years, #rate, #frequency, #missing-alert {
     width: 650px;
+}
+
+#missing-alert {
+    display: none;
 }
 
 .stopwatch {
