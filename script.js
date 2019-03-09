@@ -11,7 +11,6 @@ class Stopwatch {
         this.print(this.times);
     }
 
-    // FIX ISSUE WHERE THE 25 CENT SOUND PLAYS A LOT OF TIMES WHILE ON 25 CENTS
     // DEPLOY TO WATCHYOURINTERESTGROW.COM
 
     showAlert(message) {
