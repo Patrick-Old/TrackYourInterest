@@ -77,8 +77,10 @@ class Stopwatch {
         this.totalEarned = 0;
         var totalAmountDiv = document.getElementById("totalAmount")
         totalAmountDiv.innerText = "$0.00";
+        /*
         var totalEarnedDiv = document.getElementById("totalEarned")
         totalEarnedDiv.innerText = "$0.00";
+        */
         var currentAmountDiv = document.getElementById("currentAmount")
         currentAmountDiv.innerText = "$0.00";
         this.first = true; // helps for getting ding at first cent
@@ -192,8 +194,10 @@ class Stopwatch {
         } else {
             var totalEarnedDiv = document.getElementById("totalAmount");
             totalEarnedDiv.innerText = "$" + this.totalAmount;
+            /*
             var totalAmountDiv = document.getElementById("totalEarned");
             totalAmountDiv.innerText = "$" + this.totalEarned;
+            */
             var currentAmountDiv = document.getElementById("currentAmount");
             currentAmountDiv.innerText = "$" + this.currentAmount;
         }

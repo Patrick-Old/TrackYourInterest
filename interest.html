@@ -16,53 +16,55 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Compound Interest Calculator</title>
 </head>
 <body>
-    <h1>
-        Watch (and hear) your interest grow!
+    <h1 id="header">
+        Track Your Interest
     </h1>
     <div class='form-group'>
         <label>Principal</label>
-        <input class="form-control" id="principal" class='interestInput'>
+        <input class="form-control form-control-lg" id="principal" class='interestInput'>
         <label>Annual Addition</label>
-        <input class="form-control" id="addition" class='interestInput'>
+        <input class="form-control form-control-lg" id="addition" class='interestInput'>
         <label>Years to Grow</label>
-        <input class="form-control" id="years" class='interestInput'>
+        <input class="form-control form-control-lg" id="years" class='interestInput'>
         <label>Interest Rate</label>
-        <input class="form-control" id="rate" class='interestInput'>
+        <input class="form-control form-control-lg" id="rate" class='interestInput'>
         <label>Compounded (number of times per year)</label>
-        <input class="form-control" id="frequency" class='interestInput'>
-        <button type='submit' href="#" class="btn-primary" onClick="stopwatch.start();" id='startBtn'>Start</a>
-        <button href="#" class="btn-primary" onClick="stopwatch.stop();" id= 'stopBtn'>Stop</a>
-        <button href="#" class="btn-primary" onClick="stopwatch.restart();" id='restartBtn'>Reset</a>
+        <input class="form-control form-control-lg" id="frequency" class='interestInput'>
+        <button type='submit' href="#" class="btn btn-primary" onClick="stopwatch.start();" id='startBtn'>Start</a>
+        <button href="#" class="btn btn-primary" onClick="stopwatch.stop();" id= 'stopBtn'>Stop</a>
+        <button href="#" class="btn btn-primary" onClick="stopwatch.restart();" id='restartBtn'>Reset</a>
     </div>
     <div class="alert alert-danger" role="alert" id="missing-alert">
         This is a primary alert—check it out!
     </div>
     <div class="stopwatch" id="stopwatch"></div>
     <div id='results'>
-        <div id='totalAmountHeader'>
-            Eventually you will have:
+        <div id="current">
+            <div id='currentAmountHeader'>
+                Current total:
+            </div>
+            <div id="currentAmount">
+                $0.00
+            </div>
         </div>
-        <div id='totalAmount'>
-            $0.00
-        </div>
-        <div id='totalEarnedHeader'>
-            Eventually you will earn:
-        </div>
-        <div id='totalEarned'>
-            $0.00
-        </div>
-        <div id='currentAmountHeader'>
-            So far you have earned:
-        </div>
-        <div id="currentAmount">
-            $0.00
+        <div id="total">
+            <div id='totalAmountHeader'>
+                Longterm total:
+            </div>
+            <div id='totalAmount'>
+                $0.00
+            </div>
         </div>
     </div>
+    <footer>
+        <p>Created w/ &#9825; by Patrick</p>
+    </footer>
     <amp-auto-ads type="adsense"
               data-ad-client="ca-pub-8976228698578005">
     </amp-auto-ads>

@@ -1,24 +1,34 @@
 body {
-    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    font-family: sans-serif;
+    background-color: rgb(19, 19, 19);
+    color: rgb(247, 247, 247);
 }
 
-#startBtn, #stopBtn, #restartBtn {
-    margin-top: 10px;
-    margin-right: 5px;
-    width: 213px;
+#header {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 80px;
 }
 
-.interestInput {
-    margin-top: 50px;
-    width: 500px;
-}
+.interestInput, textarea {
+    color : #211515; 
+    height: 50px;
+  }
 
-#results {
+label {
     font-size: 36px;
+    margin-top: 8px;
+    margin-bottom: -5px;
+    margin-left: 3px;
 }
 
-#principal, #addition, #years, #rate, #frequency, #missing-alert {
-    width: 650px;
+.btn {
+    margin-top: 8px;
+    margin-right: 5px;
+    width: 100px;
 }
 
 #missing-alert {
@@ -26,5 +36,20 @@ body {
 }
 
 .stopwatch {
-    font-size: 36px;
+    text-align: center;
+    font-size: 80px;
+    /*font-family: 'Orbitron';*/
+}
+
+#results {
+    text-align: center;
+    font-size: 64px;
+}
+
+#totalAmountHeader, #totalAmount, #currentAmountHeader, #currentAmount {
+    display: inline-block;
+}
+
+footer {
+    margin-top: 100px;
 }
